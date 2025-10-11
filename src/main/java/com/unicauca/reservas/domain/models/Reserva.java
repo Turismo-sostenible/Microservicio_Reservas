@@ -42,6 +42,13 @@ public class Reserva {
         return new Reserva(nuevoId, usuario, guia, plan, participantes, refrigerio, fechaReserva, precioTotal);
     }
 
+    public static Reserva reconstruct(ReservaId id, Usuario usuario, Guia guia, Plan plan, Integer participantes, Refrigerio refrigerio, LocalDateTime fechaReserva, EstadoReserva estado, Integer precioTotal) {
+        // Lógica para reconstruir una reserva existente
+        Reserva reserva = new Reserva(id, usuario, guia, plan, participantes, refrigerio, fechaReserva, precioTotal);
+        reserva.estado = estado; // Establecer el estado existente
+        return reserva;
+    }
+
     public void actualizarReserva(Reserva reserva) {
         this.usuario = reserva.getUsuario();
         this.guia = reserva.getGuia();

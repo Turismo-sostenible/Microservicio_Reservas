@@ -2,7 +2,7 @@ package com.unicauca.reservas.application.usecases;
 
 import com.unicauca.reservas.application.port.input.CreateReservaUseCase;
 import com.unicauca.reservas.application.port.output.ReservaRepositoryPort;
-import com.unicauca.reservas.domain.models.Reserva;
+import com.unicauca.reservas.domain.models.*;
 
 public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
 
@@ -15,11 +15,11 @@ public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
     @Override
     public Reserva createReserva(ReservaRequest reserva) {
         Reserva nuevaReserva = Reserva.create(
-                reserva.usuario(),
-                reserva.guia(),
-                reserva.plan(),
+                new Usuario(reserva.usuario(), null, null),
+                new Guia(reserva.guia(), null, null),
+                new Plan(reserva.plan(), null, null, null),
                 reserva.participantes(),
-                reserva.refrigerio(),
+                Refrigerio.valueOf(reserva.refrigerio()),
                 reserva.fechaReserva(),
                 reserva.precioTotal()
         );

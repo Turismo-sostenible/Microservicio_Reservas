@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # --- SERVICIO DE LA APLICACIÓN ---
+  reservas-service:
+    build: .
+    container_name: reservas-service-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    networks:
+      - reservas-net
+
+  # --- BASE DE DATOS POSTGRES ---
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: reservas_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - reservas-net
+
+# Volumen persistente para la base de datos
+volumes:
+  postgres_data:
+
+# Red interna
+networks:
+  reservas-net:
+    driver: bridge

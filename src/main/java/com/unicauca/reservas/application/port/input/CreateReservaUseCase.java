@@ -7,5 +7,5 @@ import java.time.LocalDateTime;
 public interface CreateReservaUseCase {
     Reserva createReserva(ReservaRequest reserva);
 
-    record ReservaRequest(Plan plan, Usuario usuario, Guia guia, Integer participantes, Refrigerio refrigerio, LocalDateTime fechaReserva, Integer precioTotal) { }
+    record ReservaRequest(Integer plan, Integer usuario, Integer guia, Integer participantes, String refrigerio, LocalDateTime fechaReserva, Integer precioTotal) { }
 }
