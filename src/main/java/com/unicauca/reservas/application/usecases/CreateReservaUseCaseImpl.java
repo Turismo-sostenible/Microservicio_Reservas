@@ -16,7 +16,7 @@ public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
     public Reserva createReserva(ReservaRequest reserva) {
         Reserva nuevaReserva = Reserva.create(
                 new Usuario(reserva.usuario(), null, null),
-                new Guia(reserva.guia(), null, null),
+                new Guia(reserva.guia(), null),
                 new Plan(reserva.plan(), null, null, null),
                 reserva.participantes(),
                 Refrigerio.valueOf(reserva.refrigerio()),
