@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/reservas")
+@RequestMapping()
 public class ReservaController {
 
     private final CreateReservaUseCase createReservaUseCase;
