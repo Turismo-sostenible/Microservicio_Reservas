@@ -69,12 +69,12 @@ public class ReservaController {
     public ResponseEntity<Void> updateReserva(@PathVariable String id, @RequestBody UpdateReservaRequest request) {
         var reserva = reservaMapper.toDomain(request, id);
         boolean updatedReserva = updateReservaUseCase.updateReserva(reserva);
-        return updatedReserva ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        return updatedReserva ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReserva(@PathVariable String id) {
         deleteReservaUseCase.deleteReserva(ReservaId.fromString(id));
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }

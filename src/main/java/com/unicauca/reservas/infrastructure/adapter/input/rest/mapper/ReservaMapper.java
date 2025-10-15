@@ -28,14 +28,8 @@ public class ReservaMapper {
     public UpdateReservaUseCase.ReservaRequest toDomain(UpdateReservaRequest request, String id){
         return new UpdateReservaUseCase.ReservaRequest(
                 ReservaId.fromString(id),
-                request.plan(),
-                request.usuario(),
-                request.guia(),
-                request.participantes(),
                 request.refrigerio(),
-                request.fechaReserva(),
-                EstadoReserva.PENDIENTE, // Estado por defecto al actualizar, mejorar esto en el futuro
-                request.precioTotal()
+                request.fechaReserva()
         );
     }
 

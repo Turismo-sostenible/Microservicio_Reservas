@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 
 public record CreateReservaRequest(
-        Integer  plan,
-        Integer  usuario,
+        String  plan,
+        String  usuario,
         Integer  guia,
         Integer participantes,
         String refrigerio,

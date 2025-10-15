@@ -46,7 +46,7 @@ public class PostgresReservaRepositoryAdapter implements ReservaRepositoryPort {
     @Override
     public boolean update(Reserva reserva) {
         if (jpaRepository.existsById(reserva.getId().value())) {
-            var jpaEntity = mapper.toJpaEntity(reserva);
+            var jpaEntity = mapper.toJpaEntityUpdate(reserva);
             jpaRepository.save(jpaEntity);
             return true;
         }

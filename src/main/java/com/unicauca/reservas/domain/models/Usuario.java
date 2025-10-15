@@ -1,19 +1,31 @@
 package com.unicauca.reservas.domain.models;
 
-import java.util.Random;
-
 public class Usuario {
-    private final Integer id;
+    private final String id;
     private String nombre;
+    private String apellido;
     private String email;
 
-    public Usuario(Integer id, String nombre, String email) {
+    public Usuario(String id, String nombre, String apellido, String email) {
         this.id = id;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

@@ -56,7 +56,6 @@ public class Reserva {
         this.participantes = reserva.getParticipantes();
         this.refrigerio = reserva.getRefrigerio();
         this.fechaReserva = reserva.getFechaReserva();
-        this.estado = reserva.getEstado();
         this.precioTotal = reserva.getPrecioTotal();
     }
 

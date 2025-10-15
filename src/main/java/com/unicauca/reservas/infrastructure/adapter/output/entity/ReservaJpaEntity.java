@@ -16,13 +16,13 @@ public class ReservaJpaEntity {
     private UUID id;
 
     @Column(name = "usuario_id", nullable = false)
-    private Integer usuarioId;
+    private String usuarioId;
 
     @Column(name = "guia_id", nullable = false)
     private Integer guiaId;
 
     @Column(name = "plan_id", nullable = false)
-    private Integer planId;
+    private String planId;
 
     @Column(nullable = false)
     private Integer participantes;

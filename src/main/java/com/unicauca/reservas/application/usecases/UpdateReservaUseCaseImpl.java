@@ -3,7 +3,6 @@ package com.unicauca.reservas.application.usecases;
 import com.unicauca.reservas.application.port.input.UpdateReservaUseCase;
 import com.unicauca.reservas.application.port.output.ReservaRepositoryPort;
 import com.unicauca.reservas.domain.models.Reserva;
-import com.unicauca.reservas.domain.models.ReservaId;
 
 import java.util.Optional;
 
@@ -19,26 +18,25 @@ public class UpdateReservaUseCaseImpl implements UpdateReservaUseCase {
     public boolean updateReserva(ReservaRequest reserva) {
         Optional<Reserva> existingReserva = reservaRepositoryPort.findById(reserva.id());
 
-        if (existingReserva.isPresent()) {
+        if (existingReserva.isEmpty()) {
             return false;
         }
 
         Reserva nuevaReserva = existingReserva.get();
 
         Reserva reservaActualizada = new Reserva(
-                reserva.id(),
-                reserva.usuario(),
-                reserva.guia(),
-                reserva.plan(),
-                reserva.participantes(),
+                nuevaReserva.getId(),
+                nuevaReserva.getUsuario(),
+                nuevaReserva.getGuia(),
+                nuevaReserva.getPlan(),
+                nuevaReserva.getParticipantes(),
                 reserva.refrigerio(),
                 reserva.fechaReserva(),
-                reserva.precioTotal()
+                nuevaReserva.getPrecioTotal()
         );
 
         nuevaReserva.actualizarReserva(reservaActualizada);
         reservaRepositoryPort.update(nuevaReserva);
-
         return true;
     }
 }

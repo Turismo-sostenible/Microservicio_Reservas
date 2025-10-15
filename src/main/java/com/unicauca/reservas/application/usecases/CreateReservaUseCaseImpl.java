@@ -15,9 +15,9 @@ public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
     @Override
     public Reserva createReserva(ReservaRequest reserva) {
         Reserva nuevaReserva = Reserva.create(
-                new Usuario(reserva.usuario(), null, null),
+                new Usuario(reserva.usuario(), null, null, null),
                 new Guia(reserva.guia(), null),
-                new Plan(reserva.plan(), null, null, null),
+                new Plan(reserva.plan(), null, null, null, null, null),
                 reserva.participantes(),
                 Refrigerio.valueOf(reserva.refrigerio()),
                 reserva.fechaReserva(),
