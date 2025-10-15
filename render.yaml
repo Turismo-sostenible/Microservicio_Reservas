@@ -1,0 +1,37 @@
+# render.yaml - Versión final
+
+# Define los servicios de la aplicación (como tu API)
+services:
+  # 1. Servicio para tu aplicación Spring Boot
+  - name: Reserva-service
+    type: web
+    plan: free
+    runtime: docker
+    buildFilter:
+      paths:
+        - "src/**"
+        - "pom.xml"
+        - "Dockerfile"
+    dockerfilePath: ./Dockerfile
+    envVars:
+      # Referencia a las variables de la base de datos definida abajo
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: postgres-db # El nombre que le dimos a la base de datos
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: postgres-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: postgres-db
+          property: password
+
+# Define las bases de datos
+databases:
+  # 2. Servicio para la base de datos PostgreSQL
+  - name: postgres-db
+    databaseName: reservas_db
+    user: user
+    plan: free

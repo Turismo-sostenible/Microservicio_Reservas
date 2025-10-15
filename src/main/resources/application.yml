@@ -1,0 +1,43 @@
+# ===================================================================
+# CONFIGURACIÓN BASE (Común para todos los perfiles)
+# ===================================================================
+server:
+  port: 8080
+
+spring:
+  application:
+    name: reservas
+  main:
+    banner-mode: "off" # Limpia los logs de inicio
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+---
+# ===================================================================
+# PERFIL DOCKER (Desarrollo en máquina)
+# ===================================================================
+spring:
+  config:
+    activate:
+      on-profile: "docker"
+
+  datasource:
+    url: jdbc:postgresql://postgres-db:5432/reservas_db
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+---
+# ===================================================================
+# PERFIL DE PRODUCCIÓN (Render)
+# ===================================================================
+spring:
+  config:
+    activate:
+      on-profile: "prod"
