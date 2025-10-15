@@ -1,5 +1,5 @@
 # ===================================================================
-# CONFIGURACIÓN BASE (Común para todos los perfiles)
+# CONFIGURACIÃ“N BASE (ComÃºn para todos los perfiles)
 # ===================================================================
 server:
   port: 8080
@@ -20,7 +20,7 @@ spring:
 
 ---
 # ===================================================================
-# PERFIL DOCKER (Desarrollo en máquina)
+# PERFIL DOCKER (Desarrollo en mÃ¡quina)
 # ===================================================================
 spring:
   config:
@@ -35,7 +35,7 @@ spring:
 
 ---
 # ===================================================================
-# PERFIL DE PRODUCCIÓN (Render)
+# PERFIL DE PRODUCCIÃ“N (Render)
 # ===================================================================
 spring:
   config:
