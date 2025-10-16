@@ -40,7 +40,7 @@ services:
       - "5672:5672"   # Puerto del broker para la aplicación
       - "15672:15672" # Puerto para la interfaz web de gestión
     networks:
-      - guias-net
+      - reservas-net
 
 # Volumen persistente para la base de datos
 volumes:
