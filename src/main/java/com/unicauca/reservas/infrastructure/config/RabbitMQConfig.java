@@ -15,9 +15,11 @@ public class RabbitMQConfig {
     // Nombres del Exchange y Routing Key del PUBLICADOR (guia-service)
     public static final String GUIAS_EVENTS_EXCHANGE = "guias.events.exchange";
     public static final String GUIAS_EVENTS_ROUTING_KEY = "guias.event.#";
-
-
     public static final String GUIAS_CREATED_NOTIFICATIONS_QUEUE = "guias.created.notifications.queue";
+
+    public static final String PLAN_EVENTS_EXCHANGE = "plan.events.exchange";
+    public static final String PLAN_EVENTS_ROUTING_KEY = "plan.event.#";
+    public static final String PLAN_CREATED_NOTIFICATIONS_QUEUE = "plan.created.notifications.queue";
 
     // 1. Declaramos que conocemos el Exchange público (el tablón de anuncios)
     @Bean
@@ -25,12 +27,10 @@ public class RabbitMQConfig {
         return new TopicExchange(GUIAS_EVENTS_EXCHANGE);
     }
 
-
     @Bean
     public Queue notificationsQueue() {
         return new Queue(GUIAS_CREATED_NOTIFICATIONS_QUEUE);
     }
-
 
     // Conectamos nuestro buzón al tablón de anuncios, pidiendo solo los mensajes que nos interesan.
     @Bean
@@ -41,6 +41,28 @@ public class RabbitMQConfig {
     // Le decimos a Spring cómo convertir el JSON de los mensajes a nuestros objetos Java.
     @Bean
     public MessageConverter jsonMessageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
+
+    @Bean
+    public TopicExchange planEventsExchange() {
+        return new TopicExchange(PLAN_EVENTS_EXCHANGE);
+    }
+
+    @Bean
+    public Queue planNotificationsQueue() {
+        return new Queue(PLAN_CREATED_NOTIFICATIONS_QUEUE);
+    }
+
+    // Conectamos nuestro buzón al tablón de anuncios, pidiendo solo los mensajes que nos interesan.
+    @Bean
+    public Binding planBinding(Queue planNotificationsQueue, TopicExchange planEventsExchange) {
+        return BindingBuilder.bind(planNotificationsQueue).to(planEventsExchange).with(PLAN_EVENTS_ROUTING_KEY);
+    }
+
+    // Le decimos a Spring cómo convertir el JSON de los mensajes a nuestros objetos Java.
+    @Bean
+    public MessageConverter planJsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 }
