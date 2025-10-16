@@ -6,6 +6,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,7 +35,7 @@ public class RabbitMQConfig {
 
     // Conectamos nuestro buzón al tablón de anuncios, pidiendo solo los mensajes que nos interesan.
     @Bean
-    public Binding binding(Queue queue, TopicExchange exchange) {
+    public Binding guiasBinding(@Qualifier("notificationsQueue") Queue queue, @Qualifier("guiasEventsExchange") TopicExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(GUIAS_EVENTS_ROUTING_KEY);
     }
 
@@ -44,6 +45,7 @@ public class RabbitMQConfig {
         return new Jackson2JsonMessageConverter();
     }
 
+    // --- Configuración para PLAN ---
     @Bean
     public TopicExchange planEventsExchange() {
         return new TopicExchange(PLAN_EVENTS_EXCHANGE);
@@ -56,8 +58,8 @@ public class RabbitMQConfig {
 
     // Conectamos nuestro buzón al tablón de anuncios, pidiendo solo los mensajes que nos interesan.
     @Bean
-    public Binding planBinding(Queue planNotificationsQueue, TopicExchange planEventsExchange) {
-        return BindingBuilder.bind(planNotificationsQueue).to(planEventsExchange).with(PLAN_EVENTS_ROUTING_KEY);
+    public Binding planBinding(@Qualifier("planNotificationsQueue") Queue planQueue, @Qualifier("planEventsExchange") TopicExchange planExchange) {
+        return BindingBuilder.bind(planQueue).to(planExchange).with(PLAN_EVENTS_ROUTING_KEY);
     }
 
     // Le decimos a Spring cómo convertir el JSON de los mensajes a nuestros objetos Java.
