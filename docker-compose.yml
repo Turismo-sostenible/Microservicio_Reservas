@@ -7,8 +7,11 @@ services:
     container_name: reservas-service-app
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - postgres-db
+      - rabbitmq-broker
     networks:
       - reservas-net
 
@@ -26,6 +29,18 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - reservas-net
+
+  rabbitmq-broker:
+    image: rabbitmq:3.11-management # Usamos la imagen con la UI de gestión
+    container_name: rabbitmq-broker
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - "5672:5672"   # Puerto del broker para la aplicación
+      - "15672:15672" # Puerto para la interfaz web de gestión
+    networks:
+      - guias-net
 
 # Volumen persistente para la base de datos
 volumes:

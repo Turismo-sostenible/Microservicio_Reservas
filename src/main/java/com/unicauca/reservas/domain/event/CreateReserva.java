@@ -4,5 +4,13 @@ import com.unicauca.reservas.domain.models.*;
 
 import java.time.LocalDateTime;
 
-public record CreateReserva(ReservaId reservaId, Usuario usuario, Guia guia, Plan plan, Integer participantes, Refrigerio refrigerio, LocalDateTime fechaReserva, Integer precioTotal) {
+public record CreateReserva(
+        ReservaId reservaId,
+        Usuario usuario,
+        Guia guia,
+        Plan plan,
+        Integer participantes,
+        Refrigerio refrigerio,
+        LocalDateTime fechaReserva,
+        Integer precioTotal) {
 }
