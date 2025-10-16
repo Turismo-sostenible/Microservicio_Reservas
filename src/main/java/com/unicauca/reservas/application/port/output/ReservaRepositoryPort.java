@@ -2,7 +2,6 @@ package com.unicauca.reservas.application.port.output;
 
 import com.unicauca.reservas.domain.models.Reserva;
 import com.unicauca.reservas.domain.models.ReservaId;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;

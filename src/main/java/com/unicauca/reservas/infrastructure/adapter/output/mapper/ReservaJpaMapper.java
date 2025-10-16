@@ -39,7 +39,7 @@ public class ReservaJpaMapper {
         return Reserva.reconstruct(
                 new ReservaId(entity.getId()),
                 new Usuario(entity.getUsuarioId(), null, null, null),
-                new Guia(entity.getGuiaId(), null),
+                new Guia(entity.getGuiaId(), null, null, null),
                 new Plan(entity.getPlanId(), null, null, null, null, null),
                 entity.getParticipantes(),
                 Refrigerio.valueOf(entity.getRefrigerio().name()),

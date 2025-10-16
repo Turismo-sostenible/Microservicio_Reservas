@@ -8,18 +8,22 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Guia {
     private final Integer id;
     private String nombre;
+    private String email;
+    private String telefono;
     private EstadoGuia estado;
     private final List<Horario> horarios;
 
-    public Guia(Integer id, String nombre) {
+    public Guia(Integer id, String nombre, String email, String telefono) {
         this.id = id;
         this.nombre = nombre;
+        this.email = email;
+        this.telefono = telefono;
         this.estado = EstadoGuia.ACTIVO;
         this.horarios = new ArrayList<>();
     }
 
-    public static Guia reconstitute(Integer id, String nombre, EstadoGuia estado, List<Horario> horarios) {
-        Guia guia = new Guia(id, nombre);
+    public static Guia reconstitute(Integer id, String nombre, String email, String telefono, EstadoGuia estado, List<Horario> horarios) {
+        Guia guia = new Guia(id, nombre, email, telefono);
         guia.estado = estado;
         guia.horarios.addAll(horarios);
         return guia;
@@ -29,9 +33,9 @@ public class Guia {
      * Factory method para la creación de un nuevo Guía, asegurando un estado
      * inicial válido.
      */
-    public static Guia crear(String nombre) {
+    public static Guia crear(String nombre, String email, String telefono) {
         // Aquí se pueden añadir más validaciones si es necesario
-        return new Guia(ThreadLocalRandom.current().nextInt(0, 10000), nombre);
+        return new Guia(ThreadLocalRandom.current().nextInt(0, 10000), nombre, email, telefono);
     }
 
     // --- Lógica de Negocio ---
@@ -67,19 +71,27 @@ public class Guia {
         this.estado = EstadoGuia.ACTIVO;
     }
 
-    public List<Horario> getHorarios() {
-        return horarios;
-    }
-
-    public EstadoGuia getEstado() {
-        return estado;
+    public Integer getId() {
+        return id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public Integer getId() {
-        return id;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public EstadoGuia getEstado() {
+        return estado;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
     }
 }

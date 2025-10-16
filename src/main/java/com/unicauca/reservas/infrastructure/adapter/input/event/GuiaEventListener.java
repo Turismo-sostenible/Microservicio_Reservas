@@ -14,7 +14,7 @@ public class GuiaEventListener {
 
     @RabbitListener(queues = RabbitMQConfig.GUIAS_CREATED_NOTIFICATIONS_QUEUE)
     public void handleGuiaCreado(GuiaCreadoEvent event) {
-        log.info("EVENTO ENRIQUECIDO 'Guia Creado' RECIBIDO. ID: {}", event.guiaId().value());
+        log.info("EVENTO ENRIQUECIDO 'Guia Creado' RECIBIDO. ID: {}", event.guiaId());
 
         // --- AHORA TIENES ACCESO A TODO EL OBJETO ---
         System.out.println("======================================================");
