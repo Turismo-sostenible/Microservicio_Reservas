@@ -13,18 +13,17 @@ public class Guia {
     private EstadoGuia estado;
     private final List<Horario> horarios;
 
-    public Guia(Integer id, String nombre, String email, String telefono) {
+    public Guia(Integer id, String nombre, String email, String telefono, EstadoGuia estado) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
-        this.estado = EstadoGuia.ACTIVO;
+        this.estado = estado;
         this.horarios = new ArrayList<>();
     }
 
     public static Guia reconstitute(Integer id, String nombre, String email, String telefono, EstadoGuia estado, List<Horario> horarios) {
-        Guia guia = new Guia(id, nombre, email, telefono);
-        guia.estado = estado;
+        Guia guia = new Guia(id, nombre, email, telefono, estado);
         guia.horarios.addAll(horarios);
         return guia;
     }
@@ -33,9 +32,9 @@ public class Guia {
      * Factory method para la creación de un nuevo Guía, asegurando un estado
      * inicial válido.
      */
-    public static Guia crear(String nombre, String email, String telefono) {
+    public static Guia crear(String nombre, String email, String telefono, EstadoGuia estado) {
         // Aquí se pueden añadir más validaciones si es necesario
-        return new Guia(ThreadLocalRandom.current().nextInt(0, 10000), nombre, email, telefono);
+        return new Guia(ThreadLocalRandom.current().nextInt(0, 10000), nombre, email, telefono, estado);
     }
 
     // --- Lógica de Negocio ---
