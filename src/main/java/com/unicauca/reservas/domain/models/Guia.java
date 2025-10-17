@@ -39,35 +39,8 @@ public class Guia {
 
     // --- Lógica de Negocio ---
 
-    public void agregarHorario(Horario nuevoHorario) {
-        if (this.estado == EstadoGuia.INACTIVO) {
-            throw new IllegalStateException("No se puede agregar un horario a un guía inactivo.");
-        }
-
-        // Regla de negocio: No permitir horarios que se solapen.
-        boolean seSolapa = horarios.stream().anyMatch(h -> h.seSolapaCon(nuevoHorario));
-        if (seSolapa) {
-            throw new IllegalArgumentException("El nuevo horario se solapa con uno existente.");
-        }
-        this.horarios.add(nuevoHorario);
-    }
-
     public void actualizarDatos(String nuevoNombre) {
         this.nombre = Objects.requireNonNull(nuevoNombre, "El nombre no puede ser nulo.");
-    }
-
-    public void desactivar() {
-        if (this.estado == EstadoGuia.INACTIVO) {
-            throw new IllegalStateException("El guía ya se encuentra inactivo.");
-        }
-        this.estado = EstadoGuia.INACTIVO;
-    }
-
-    public void activar() {
-        if (this.estado == EstadoGuia.ACTIVO) {
-            throw new IllegalStateException("El guía ya se encuentra activo.");
-        }
-        this.estado = EstadoGuia.ACTIVO;
     }
 
     public Integer getId() {
