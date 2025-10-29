@@ -1,0 +1,67 @@
+# .github/workflows/ci.yml
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # --- NUEVO: SERVICIOS ---
+    # Estos contenedores se inician ANTES de los "steps"
+    # Los hostnames serán "postgres", "mongo", "rabbitmq"
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: reservas_db
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U user -d reservas_db"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+
+      rabbitmq:
+        image: rabbitmq:3.11-management
+        env:
+          RABBITMQ_DEFAULT_USER: user
+          RABBITMQ_DEFAULT_PASS: password
+        ports:
+          - 5672:5672
+        options: >-
+          --health-cmd "rabbitmqctl status"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build and test with Maven
+        # --- MODIFICADO: Añadimos las variables de entorno ---
+        # Estas variables las usará el application-test.yml (perfil "ci")
+        env:
+          PGHOST: postgres
+          PGPORT: 5432
+          PGUSER: user
+          PGPASSWORD: password
+          
+          RABBIT_HOST: rabbitmq
+          RABBIT_PORT: 5672
+          RABBIT_USER: user
+          RABBIT_PASSWORD: password
+
+        # --- MODIFICADO: Activamos los perfiles "test" y "ci" ---
+        run: mvn clean install -Dspring.profiles.active=test,ci
