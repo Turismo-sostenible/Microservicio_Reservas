@@ -14,7 +14,7 @@ jobs:
 
     # --- NUEVO: SERVICIOS ---
     # Estos contenedores se inician ANTES de los "steps"
-    # Los hostnames serán "postgres", "mongo", "rabbitmq"
+    # Los hostnames serán "postgres", "rabbitmq"
     services:
       postgres:
         image: postgres:15
