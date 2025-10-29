@@ -17,7 +17,7 @@ spring:
 
   # --- CONFIGURACIÓN DE POSTGRESQL PARA CI ---
   datasource:
-    url: jdbc:postgresql://${PGHOST:postgres}:${PGPORT:5432}/guias_db_command
+    url: jdbc:postgresql://${PGHOST:postgres}:${PGPORT:5432}/reservas_db
     username: ${PGUSER:user}
     password: ${PGPASSWORD:password}
     driver-class-name: org.postgresql.Driver
