@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/reservas")
+@RequestMapping()
 @Tag(name = "Reservas", description = "API para la gestión de reservas de planes turísticos")
 public class ReservaController {
 
