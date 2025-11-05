@@ -4,7 +4,7 @@ import java.util.UUID;
 
 // Este es el nuevo "contrato" enriquecido del evento
 public record GuiaCreadoEvent(
-        Integer guiaId,
+        String guiaId,
         String nombre,
         String email,
         String telefono,

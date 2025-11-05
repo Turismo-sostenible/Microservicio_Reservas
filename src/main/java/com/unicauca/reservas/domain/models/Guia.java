@@ -6,14 +6,14 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Guia {
-    private final Integer id;
+    private final String id;
     private String nombre;
     private String email;
     private String telefono;
     private EstadoGuia estado;
     private final List<Horario> horarios;
 
-    public Guia(Integer id, String nombre, String email, String telefono, EstadoGuia estado) {
+    public Guia(String id, String nombre, String email, String telefono, EstadoGuia estado) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -22,7 +22,7 @@ public class Guia {
         this.horarios = new ArrayList<>();
     }
 
-    public static Guia reconstitute(Integer id, String nombre, String email, String telefono, EstadoGuia estado, List<Horario> horarios) {
+    public static Guia reconstitute(String id, String nombre, String email, String telefono, EstadoGuia estado, List<Horario> horarios) {
         Guia guia = new Guia(id, nombre, email, telefono, estado);
         guia.horarios.addAll(horarios);
         return guia;
@@ -34,7 +34,7 @@ public class Guia {
      */
     public static Guia crear(String nombre, String email, String telefono, EstadoGuia estado) {
         // Aquí se pueden añadir más validaciones si es necesario
-        return new Guia(ThreadLocalRandom.current().nextInt(0, 10000), nombre, email, telefono, estado);
+        return new Guia(String.valueOf(ThreadLocalRandom.current().nextInt(0, 10000)), nombre, email, telefono, estado);
     }
 
     // --- Lógica de Negocio ---
@@ -43,7 +43,7 @@ public class Guia {
         this.nombre = Objects.requireNonNull(nuevoNombre, "El nombre no puede ser nulo.");
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 

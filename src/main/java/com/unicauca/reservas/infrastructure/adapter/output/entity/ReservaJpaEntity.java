@@ -19,7 +19,7 @@ public class ReservaJpaEntity {
     private String usuarioId;
 
     @Column(name = "guia_id", nullable = false)
-    private Integer guiaId;
+    private String guiaId;
 
     @Column(name = "plan_id", nullable = false)
     private String planId;

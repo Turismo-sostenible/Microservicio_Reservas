@@ -43,7 +43,7 @@ public class PostgresGuiaRepositoryAdapter implements GuiaRepositoryPort {
 
     @Override
     public boolean update(Guia guia) {
-        if (jpaRepository.existsById(guia.getId())) {
+        if (jpaRepository.existsById(Integer.parseInt(guia.getId()))) {
             var jpaEntity = mapper.toJpaEntity(guia);
             jpaRepository.save(jpaEntity);
             return true;

@@ -11,7 +11,7 @@ public class ReservaJpaMapper {
         ReservaJpaEntity entity = new ReservaJpaEntity();
         //entity.setId(reserva.getId().value());
         entity.setUsuarioId(reserva.getUsuario().getId());
-        entity.setGuiaId(Integer.parseInt(reserva.getGuia().getId().toString()));
+        entity.setGuiaId(reserva.getGuia().getId());
         entity.setPlanId(reserva.getPlan().getId());
         entity.setParticipantes(reserva.getParticipantes());
         entity.setRefrigerio(ReservaJpaEntity.RefrigerioJpa.valueOf(reserva.getRefrigerio().name()));
@@ -25,7 +25,7 @@ public class ReservaJpaMapper {
         ReservaJpaEntity entity = new ReservaJpaEntity();
         entity.setId(reserva.getId().value());
         entity.setUsuarioId(reserva.getUsuario().getId());
-        entity.setGuiaId(Integer.parseInt(reserva.getGuia().getId().toString()));
+        entity.setGuiaId(reserva.getGuia().getId());
         entity.setPlanId(reserva.getPlan().getId());
         entity.setParticipantes(reserva.getParticipantes());
         entity.setRefrigerio(ReservaJpaEntity.RefrigerioJpa.valueOf(reserva.getRefrigerio().name()));
