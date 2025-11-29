@@ -6,7 +6,7 @@ services:
     build: .
     container_name: reservas-service-app
     ports:
-      - "8080:8080"
+      - "8085:8085"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
