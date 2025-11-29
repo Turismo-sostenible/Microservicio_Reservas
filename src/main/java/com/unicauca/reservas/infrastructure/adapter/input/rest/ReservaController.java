@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping()
 @Tag(name = "Reservas", description = "API para la gestión de reservas de planes turísticos")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ReservaController {
 
     private final CreateReservaUseCase createReservaUseCase;
